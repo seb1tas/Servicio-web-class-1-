@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador Web</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding: 50px; 
+            background-color: #f4f4f4; 
+        }
+        .contenedor {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        input { 
+            padding: 10px; 
+            width: 60%; 
+            font-size: 16px; 
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button { 
+            padding: 10px 20px; 
+            font-size: 16px; 
+            background-color: #0044cc; 
+            color: white; 
+            border: none;
+            border-radius: 5px;
+            cursor: pointer; 
+        }
+        button:hover { background-color: #003399; }
+        #resultado { 
+            margin-top: 20px; 
+            text-align: left;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+            display: none; 
+        }
+    </style>
+</head>
+<body>
+<div class = "contenedor">
+    Palabras Sugeridas: <br> SOAP - SOA -REST - XML - JSON - HTTP - WSDL - UDDI <br> son las unicas palabras V:
+</div>
+<br>
+    <div class="contenedor">
+        <h1>Buscador de Conceptos</h1>
+        
+        <input type="text" id="miInput" placeholder="Ej: soap, rest, xml...">
+        <button onclick="buscar()">Buscar</button>
+
+        <div id="resultado">
+            <h2 id="titulo" style="color: #0044cc;"></h2>
+            <p id="texto"></p>
+            <p style="background: #eee; padding: 10px; border-radius: 5px;">
+                <strong>Ejemplo:</strong> <br> 
+                <span id="ejemplo" style="font-family: monospace;"></span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function buscar() {
+            var palabra = document.getElementById("miInput").value.toLowerCase().trim();
+            
+            
+            var diccionario = {
+                "soa": { 
+                    titulo: "SOA", 
+                    desc: "Arquitectura donde usas servicios como piezas independientes.", 
+                    ej: "Cajero y App conectados al mismo servicio." 
+                },
+                "soap": { 
+                    titulo: "SOAP", 
+                    desc: "Protocolo seguro basado en XML. Envía mensajes en sobres.", 
+                    ej: "Envelope - Body - Mensaje (Formato XML estricto)" 
+                },
+                "rest": { 
+                    titulo: "REST", 
+                    desc: "Estilo ligero que usa URLs para pedir datos.", 
+                    ej: "GET /api/usuarios/1" 
+                },
+                "xml": { 
+                    titulo: "XML", 
+                    desc: "Lenguaje de etiquetas para guardar datos.", 
+                    ej: "(usuario) Juan (/usuario)" 
+                },
+                "json": { 
+                    titulo: "JSON", 
+                    desc: "Formato de texto ligero y moderno.", 
+                    ej: "{ 'nombre': 'Juan', 'edad': 25 }" 
+                },
+                "http": { 
+                    titulo: "HTTP", 
+                    desc: "Protocolo de transferencia de la web.", 
+                    ej: "http://www.google.com" 
+                },
+                "wsdl": { 
+                    titulo: "WSDL", 
+                    desc: "Manual de instrucciones técnico para SOAP.", 
+                    ej: "Archivo descriptivo .xml" 
+                },
+                "uddi": { 
+                    titulo: "UDDI", 
+                    desc: "Es un estándar basado en XML que actúa como un directorio o registro global para servicios web.", 
+                    ej: "Imagina una empresa llamada 'Servicios Envío Rápido' que ofrece un servicio web para rastrear paquetes." 
+                }
+            };
+
+            var caja = document.getElementById("resultado");
+
+            if (diccionario[palabra]) {
+                document.getElementById("titulo").innerText = diccionario[palabra].titulo;
+                document.getElementById("texto").innerText = diccionario[palabra].desc;
+                document.getElementById("ejemplo").innerText = diccionario[palabra].ej;
+                caja.style.display = "block";
+            } else {
+                alert("No encontré eso. Prueba con las palabras sugeridas ");
+                caja.style.display = "none";
+            }
+        }
+    </script>
+    <br>
+
+
+</body>
+</html>
